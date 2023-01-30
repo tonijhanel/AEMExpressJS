@@ -60,12 +60,6 @@ async function getGraphQLAdventures() {
   }
 }
 
-async function returnAdventures() {
-  let output = await getGraphQLAdventures();
-  console.log("Result is" + output); // Output is 1
-  return output;
-}
-
 async function getAdventuresByActivity(activity) {
   let getData;
   try {
@@ -79,9 +73,7 @@ async function getAdventuresByActivity(activity) {
 }
 
 async function getAdventuresBySlug(slug) {
-  console.log("in getAdventuresBySlug");
   let getData;
-  let parsedAdventure;
   try {
     let query = "wknd-shared/adventure-by-slug;slug=" + slug;
     getData = await aemHeadlessClient.runPersistedQuery(query);
@@ -93,7 +85,6 @@ async function getAdventuresBySlug(slug) {
 }
 
 module.exports = {
-  getAllAdventures,
   getGraphQLAdventures,
   getAdventuresByActivity,
   getAdventuresBySlug,

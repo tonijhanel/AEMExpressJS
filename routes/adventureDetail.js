@@ -2,7 +2,6 @@ var express = require("express");
 var router = express.Router();
 
 const returnAdventures = require("../models/adventures");
-const helperFuncs = require("../public/scripts/nodeHelper");
 
 /* GET home page. */
 router.get("/:slug?", function (req, res, next) {
@@ -15,8 +14,7 @@ router.get("/:slug?", function (req, res, next) {
     res.render("adventureDetail", {
       title: "WKND Adventure Details",
       adventureDetails: adventureDetail.data.adventureList.items,
-      slug: slug,
-      helperFuncs: helperFuncs
+      slug: slug
     });
   })();
 });

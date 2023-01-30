@@ -1,11 +1,9 @@
 var express = require("express");
 var router = express.Router();
 
-const aemHeadless = require("../api/aemHeadlessClient");
 const returnAdventures = require("../models/adventures");
 /* GET home page. */
 
-//import {getAllAdventures} from "../models/adventures";
 router.get("/:activity?", function (req, res, next) {
   let activity = req.params.activity;
   let navItems = returnAdventures.getNavMenu();
@@ -14,7 +12,6 @@ router.get("/:activity?", function (req, res, next) {
     (async function () {
       try {
         allAdventures = await returnAdventures.getGraphQLAdventures();
-        console.log(allAdventures);
         res.render("index", {
           title: "WKND",
           adventures: allAdventures.data.adventureList.items,
@@ -28,13 +25,11 @@ router.get("/:activity?", function (req, res, next) {
   } else {
     let adventuresByActivity;
     const queryParameters = { activity: activity };
-    console.log("queryParameters " + queryParameters);
     (async function () {
       try {
         adventuresByActivity = await returnAdventures.getAdventuresByActivity(
           activity
         );
-        console.log(adventuresByActivity);
         res.render("index", {
           title: "WKND",
           adventures: adventuresByActivity.data.adventureList.items,
@@ -47,7 +42,6 @@ router.get("/:activity?", function (req, res, next) {
     })();
   }
 
-  //res.render('index', { title: 'WKND', adventures: parsedAdventure.data.adventureList.items, activity: activity, queryReturn: parsedAdventure});
 });
 
 module.exports = router;
