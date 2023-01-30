@@ -1,0 +1,39 @@
+extends layout
+
+block content
+   
+    header
+        a(href='/')
+            img.logo(src='/images/wknd-logo-dk.svg')
+        hr
+   
+    each adventureDetail, i in adventureDetails
+        div.adventure-detail
+            button.adventure-detail-close-button
+                a(href='/')
+                    img(src='/images/closebtn.svg')
+        h1.adventure-detail-title= adventureDetail.title
+        div.adventure-detail-info
+            div.adventure-detail-info-label Activity
+            div.adventure-detail-info-description= adventureDetail.activity
+            div.adventure-detail-info-label Type
+            div.adventure-detail-info-description= adventureDetail.adventureType
+            div.adventure-detail-info-label Trip Length
+            div.adventure-detail-info-description= adventureDetail.tripLength
+            div.adventure-detail-info-label Difficulty
+            div.adventure-detail-info-description= adventureDetail.difficulty
+            div.adventure-detail-info-label Price
+            div.adventure-detail-info-description 
+                span.adventure-detail-info-price= adventureDetail.price
+            -var htmldata = adventureDetail.itinerary.html
+           
+        div.adventure-detail-content
+            img.adventure-detail-primaryimage(src=adventureDetail.primaryImage._publishUrl)
+            div
+            |   !{adventureDetail.description.html}
+            p= adventureDetail.description.value
+            h2 Itinerary
+            hr       
+            div.adventure-detail-itineary
+            |    !{adventureDetail.itinerary.html} 
+            p

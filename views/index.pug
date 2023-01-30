@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  img.logo(src='/images/wknd-logo-dk.svg')
+  hr
+  h2 Current Adventures
+  div#navMenu
+  each navItem, w in navMenu
+    -var navLink = navItem.link
+    a.btn(href=navLink class=(activity ===  navItem.activity  ? "active" : "")) #{navItem.activity}
+
+  div.adventures
+    ul.adventure-items
+      each adventure, i in adventures
+        li.adventure-item 
+          a(href= '/adventureDetail/' + adventure.slug)
+            //img.adventure-item-image(src='/images/adobestock-175749320.jpg')
+            img.adventure-item-image(src= adventure.primaryImage._publishUrl)
+          div.adventure-item-length-price
+              div.adventure-item-label
+                div.adventure-item-length= adventure.tripLength
+                div.adventure-item-price= adventure.price
+              div.adventure-item-title= adventure.title
+
+  
+  
